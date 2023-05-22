@@ -1,0 +1,19 @@
+class Solution:
+    def permuteUnique(self, nums: List[int]) -> List[List[int]]:
+        def bk(nums,res,path):
+            if len(path)==len(nums):
+                res.append(path[:])
+                return
+            for i in range(len(nums)):
+                a=path.count(nums[i])
+                b=nums.count(nums[i])
+                if a>=b or (i>0 and nums[i]==nums[i-1]):
+                    continue             
+                path.append(nums[i])
+                bk(nums,res,path)
+                path.pop()
+        nums.sort()
+        res=[]
+        path=[]
+        bk(nums,res,path)
+        return res

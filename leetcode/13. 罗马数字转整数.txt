@@ -1,0 +1,11 @@
+class Solution:
+    def romanToInt(self, s: str) -> int:
+        int_num=[900,400,90,40,9,4,1000,500,100,50,10,5,1]
+        roman_num=['CM','CD','XC','XL','IX','IV','M','D','C','L','X','V','I']
+        result=0
+        while s:
+            for i in range(13):
+                if roman_num[i] in s:
+                    result+=int_num[i]
+                    s=s.replace(roman_num[i],'',1)
+        return result

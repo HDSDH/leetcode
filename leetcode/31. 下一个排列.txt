@@ -1,0 +1,41 @@
+class Solution:
+    def nextPermutation(self, nums: List[int]) -> None:
+        if sorted(nums)==nums[::-1]:
+            nums.sort()
+            return
+        
+        flag=len(nums)-1
+        while flag!=0:
+            if nums[flag]>nums[flag-1]:
+                sav=nums[flag]
+                nums[flag]=nums[flag-1]
+                nums[flag-1]=sav
+                if flag==len(nums)-1:
+                    return
+                res=nums[flag+1:]
+                res.sort()
+                x=0
+                for j in range(flag+1,len(nums)):
+                    nums[j]=res[x]
+                    x+=1
+                for i in range(flag-1,len(nums)):
+                    if nums[flag]<nums[i]<nums[flag-1]:
+                        temp=nums.pop(i)
+                        result=nums[flag-1:]
+                        result.sort()
+                        t=0
+                        for u in range(flag-1,len(nums)):
+                            nums[u]=result[t]
+                            t+=1
+                        nums.insert(flag-1,temp)
+                        return
+                    elif i==len(nums)-1:
+                        te=nums[flag:]
+                        te.sort()
+                        g=0
+                        for c in range(flag,len(nums)):
+                            nums[c]=te[g]
+                            g+=1
+                        return
+            else:
+                flag-=1

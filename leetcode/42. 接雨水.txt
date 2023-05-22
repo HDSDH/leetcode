@@ -1,0 +1,20 @@
+class Solution:
+    def trap(self, height: List[int]) -> int:
+        if len(height)<=2 or max(height)==0:
+            return 0
+        end=height.index(max(height))
+        res,left,right=0,0,len(height)-1
+        shal,shar=left,right
+        while left<end:
+            if height[left+1]<height[shal]:
+                res+=height[shal]-height[left+1]
+            else:
+                shal=left+1
+            left+=1
+        while right>end:
+            if height[right-1]<height[shar]:
+                res+=height[shar]-height[right-1]
+            else:
+                shar=right-1
+            right-=1
+        return res

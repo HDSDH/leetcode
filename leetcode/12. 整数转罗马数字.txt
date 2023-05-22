@@ -1,0 +1,61 @@
+class Solution:
+    def intToRoman(self, num: int) -> str:
+        def unravel(s):
+            list_s=str(s)
+            n=len(list_s)
+            ex_list=[]
+            for i in range(n):
+                ex_list.append(10**(n-i-1)*int(list_s[i]))
+            return ex_list
+
+        def expand(sin_s,x):
+            o=''
+            for i in range(x):
+                o+=sin_s
+            return o
+
+        un_list=unravel(num)
+        result=''
+        for i in un_list:
+            if i>=1000:
+                t_num=i//1000
+                result+=expand('M',t_num)
+            if 99<i<1000:
+                if i==400:
+                    result+='CD'
+                if i==900:
+                    result+='CM'
+                if i<400:
+                    h_num=i//100
+                    result+=expand('C',h_num)
+                if i==500:
+                    result+='D'
+                if 500<i<900:
+                    h_num=(i-500)//100
+                    result+='D'+expand('C',h_num)
+            if 9<i<100:
+                if i==40:
+                    result+='XL'
+                if i==90:
+                    result+='XC'
+                if i<40:
+                    ten_num=i//10
+                    result+=expand('X',ten_num)
+                if i==50:
+                    result+='L'
+                if 50<i<90:
+                    ten_num=(i-50)//10
+                    result+='L'+expand('X',ten_num)
+            if i<10:
+                if i==4:
+                    result+='IV'
+                if i==9:
+                    result+='IX'
+                if i<4:
+                    result+=expand('I',i)
+                if i==5:
+                    result+='V'
+                if 5<i<9:
+                    x=i-5
+                    result+='V'+expand('I',x)
+        return result           

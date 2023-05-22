@@ -1,0 +1,15 @@
+class Solution:
+    def multiply(self, num1: str, num2: str) -> str:
+        #return str(int(num1)*int(num2))
+        myDic = {str(i): i for i in range(10)}
+        n1 = 0
+        n2 = 0
+        x = 1
+        for i in reversed(num1):
+            n1 += myDic[i] * x
+            x *= 10
+        x = 1
+        for i in reversed(num2):
+            n2 += myDic[i] * x
+            x *= 10
+        return str(n1 * n2)

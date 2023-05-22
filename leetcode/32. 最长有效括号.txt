@@ -1,0 +1,27 @@
+class Solution:
+    def longestValidParentheses(self, s: str) -> int:
+        def findmax(sin_s,lon_s):
+            if sin_s not in lon_s:
+                return -1
+            while sin_s in lon_s:
+                loc=lon_s.find(sin_s)
+                lon_s=lon_s.replace(sin_s,'2',1)
+            return loc
+        if len(s)<=1:
+            return 0
+        while '()' in s:
+            s=s.replace('()','00')
+        while ')' in s:
+            lo=s.find(')')
+            if findmax('(',s[:lo])!=-1:
+                x=findmax('(',s[:lo])
+                s=s.replace(')','0',1)
+                s=s[:x]+'0'+s[x+1:]
+            else:
+                s=s.replace(')','1',1)
+        if '0' not in s:
+            return 0
+        result=1
+        while '0'*result in s:
+            result+=1
+        return result-1

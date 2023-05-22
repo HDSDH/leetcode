@@ -1,0 +1,16 @@
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:              
+        def dfs(path,l,r,loc):
+            if loc==2*n:
+                res.append(''.join(path))
+                return
+            if l<n:
+                path[loc]='('
+                dfs(path,l+1,r,loc+1)
+            if r<l:
+                path[loc]=')'
+                dfs(path,l,r+1,loc+1)
+        res=[]
+        path=['']*2*n        
+        dfs(path,0,0,0)
+        return res

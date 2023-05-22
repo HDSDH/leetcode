@@ -1,0 +1,42 @@
+class Solution:
+    def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
+        '''candidates.sort()
+        su=0
+        for j in candidates:
+            su+=j
+        if su<target:
+            return []
+        res=[]
+        path=[]
+        self.backtrack(candidates,target,res,path,0)
+        return res
+    def backtrack(self,candidates,target,res,path,b):
+        path=path[:]
+        if target==0 and path not in res:
+            res.append(path)
+            return
+        for i in range(b,len(candidates)):
+            x=path.count(candidates[i])
+            y=candidates.count(candidates[i])
+            if x==y or target-candidates[i]<0:
+                continue
+            path.append(candidates[i])
+            self.backtrack(candidates,target-candidates[i],res,path,i+1)
+            path.pop()'''
+
+        candidates.sort()
+        ans = []
+        def find(s,use,remain):
+            for i in range(s,len(candidates)):
+                c = candidates[i]
+                if i>s and candidates[i-1]==candidates[i]:#只要第一个相同元素
+                    continue
+                if c == remain:
+                    ans.append(use + [c])
+                    return              
+                if c < remain:
+                    find(i+1,use + [c], remain - c)
+                if c > remain:
+                    return
+        find(0,[], target)
+        return ans

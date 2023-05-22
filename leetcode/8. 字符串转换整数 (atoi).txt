@@ -1,0 +1,30 @@
+class Solution:
+    def myAtoi(self, s: str) -> int:
+        s=s.lstrip()
+        if not s:
+            return 0
+        res=''
+        flag=''
+        for i in range(len(s)):
+            if i==0:
+                if s[i]=='-':
+                    flag='-'
+                elif s[i]=='+':
+                    flag='+'
+                elif 48<=ord(s[i])<=57:
+                    flag=s[i]
+                else:
+                    return 0
+            else:
+                if ord(s[i])<48 or ord(s[i])>57:              
+                    break              
+                res+=s[i]
+        if flag+res=='+' or  flag+res=='-':
+            return 0
+        res=int(flag+res)
+        if res<-2**31:
+            return -2**31
+        elif res>2**31-1:
+            return 2**31-1
+        else:
+            return res

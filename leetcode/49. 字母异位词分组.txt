@@ -1,0 +1,8 @@
+from collections import defaultdict
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        mp = defaultdict(list)
+        for st in strs:
+            key = "".join(sorted(st))
+            mp[key].append(st)     #将key值一样的value放进去 
+        return list(mp.values()) 

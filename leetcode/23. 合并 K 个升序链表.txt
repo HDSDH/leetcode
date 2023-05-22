@@ -1,0 +1,17 @@
+class Solution:
+    def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+        res=[]
+        for i in lists:
+            cur=i
+            while cur:               
+                res.append(cur.val)
+                cur=cur.next
+        res.sort()
+        if not res:
+            return
+        Node=ListNode(res[0])
+        curNode=Node
+        for j in res[1:]:           
+            curNode.next=ListNode(j)
+            curNode=curNode.next
+        return Node
